@@ -1,0 +1,40 @@
+// s-law model for extrinsic and intrinsic coagulation cascade -
+
+#pragma::static
+TFPI,AT,TF,TM,PC,TRAUMA,SURFACE
+#static::end
+
+#pragma::dynamic
+FII,FVII,FV,FX,FVIII,FIX,FXI,FXII,FIIa,FVIIa,FVa,FXa,FVIIIa,FIXa,FXIa,FXIIa,FIIa_inactive
+#dynamic::end
+
+#pragma::structure
+// name,{reactants},{products}
+// 1. name: reaction name (used in rate section)
+// 2. {reactants}: list of dynamic species acting as a reactants
+// 3. {products}: list of dynamic species acting as a reactants
+r1,FVII,FVIIa
+r2,FVIII,FVIIIa
+r3,FIX,FIXa
+r4,FV,FVa
+r5,FX,FXa
+r6,FII,FIIa
+r7,FXI,FXIa
+r8,FXII,FXIIa
+r9,FIIa,FIIa_inactive
+#structure::end
+
+#pragma::rate
+// name,{factor_1,factor_2,....}
+// 1: name = reaction name (must be in the #pragma::structure section)
+// 2: list of factor symbols (can be both static and dynamic, order does not matter)
+r1::{FVII,TRAUMA,TF,TFPI}
+r2::{FVIII,FIIa}
+r3::{FIX,FVIIa,FXIa}
+r4::{FV,FIIa}
+r5::{FX,FVIIa}
+r6::{FII,FXa,FVa}
+r7::{FXI,FXIIa}
+r8::{FXII,SURFACE}
+r9::{FIIa,AT}
+#rate::end
