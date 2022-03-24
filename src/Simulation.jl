@@ -37,7 +37,7 @@ function loss(κ::Array{Float64,1}, Y::Array{Float64,1},  model::Dict{String,Any
 
     # compute the model ouput -
     Yₘ = model_output_vector(T,Xₘ[9,:]) # properties of the Thrombin curve 
-    ϵ = (Y - Yₘ).^2
+    ϵ = ((Y .- Yₘ)./Y).^2
 
     # return -
     return ϵ
