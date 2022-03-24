@@ -37,7 +37,7 @@ for i ∈ 1:number_of_synthetic_samples
     data_col = max.(0.0, synthetic_sampled_data[:,i])
     
     # build a data tuple to add to df -
-    data_tuple = NamedTuple{data_col_names}(data_col)
+    data_tuple = NamedTuple{data_col_names_tuple}(data_col)
     push!(synthetic_data_frame, data_tuple)
 end
 
