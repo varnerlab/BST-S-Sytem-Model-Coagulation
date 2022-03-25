@@ -15,6 +15,7 @@ using Distributions
 using DifferentialEquations
 using Tables
 using NumericalIntegration
+using Optim
 
 # load my codes -
 include(joinpath(_PATH_TO_SRC, "Balances.jl"))

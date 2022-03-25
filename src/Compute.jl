@@ -10,6 +10,10 @@ function τlag(rule::Function, T::Array{Float64,1}, X::Array{Float64,1})::Float6
     # filter -
     idx = findfirst(rule, X)
 
+    if (isnothing(idx) == true)
+        return 1000.0
+    end
+
     # return -
     return T[idx]
 end
