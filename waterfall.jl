@@ -6,12 +6,23 @@ number_of_samples = 25
 number_of_parameters = 12
 ensemble_archive = zeros(number_of_parameters+1,number_of_samples); # first row is the fitness 
 
+# load the training data -
+path_to_training_data = joinpath(_PATH_TO_DATA, "Training-Synthetic-Thrombin-TF-1K.csv")
+training_df = CSV.read(path_to_training_data, DataFrame)
+
+# build the model structure -
+path_to_model_file = joinpath(_PATH_TO_MODEL, "Coagulation.net")
+model_buffer = read_model_file(path_to_model_file)
+
+# build the default model structure -
+model = build_default_model_dictionary(model_buffer)
+
 # main loop -
 p_previous = nothing
-for i ∈ 9:number_of_samples
+for i ∈ 1:number_of_samples
 
     # run the learn routine -
-    (p, Yₘ, Y) = learn_optim(i; pₒ = p_previous)
+    (p, Yₘ, Y) = learn_optim(i, model, training_df; pₒ = nothing)
 
     # compute the fitness -
     fitness = norm((Yₘ .- Y).^2)

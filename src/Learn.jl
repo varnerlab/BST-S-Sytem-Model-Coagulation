@@ -1,15 +1,5 @@
-function learn_optim(index::Int; pₒ::Union{Nothing,Array{Float64,1}} = nothing)
-
-    # load the training data -
-    path_to_training_data = joinpath(_PATH_TO_DATA, "Training-Synthetic-Thrombin-TF-1K.csv")
-    training_df = CSV.read(path_to_training_data, DataFrame)
-
-    # build the model structure -
-    path_to_model_file = joinpath(_PATH_TO_MODEL, "Coagulation.net")
-    model_buffer = read_model_file(path_to_model_file)
-
-    # build the default model structure -
-    model = build_default_model_dictionary(model_buffer)
+function learn_optim(index::Int, model::Dict{String,Any}, training_df::DataFrame; 
+    pₒ::Union{Nothing,Array{Float64,1}} = nothing)
 
     # main simulation loop -
     SF = 1e9
@@ -69,7 +59,8 @@ function learn_optim(index::Int; pₒ::Union{Nothing,Array{Float64,1}} = nothing
     # setup the objective function -
     inner_optimizer = LBFGS()
     obj_function(p) =  loss_scalar(p, Y, model)
-    results = optimize(obj_function, κ[:,2], κ[:,3], pₒ, Fminbox(inner_optimizer), Optim.Options(time_limit = 600, show_trace = true, trace_simplex = true, show_every = 10))
+    results = optimize(obj_function, κ[:,2], κ[:,3], pₒ, Fminbox(inner_optimizer), 
+        Optim.Options(time_limit = 600, show_trace = true, trace_simplex = true, show_every = 10))
     
     # grab the best parameters -
     p_best = Optim.minimizer(results)
@@ -88,7 +79,7 @@ function learn_optim(index::Int; pₒ::Union{Nothing,Array{Float64,1}} = nothing
     # run the model -
     (T,U) = evaluate(model)
     Xₘ = hcat(U...)
-    Yₘ = model_output_vector(T,Xₘ[9,:]) # properties of the Thrombin curve 
+    Yₘ = model_output_vector(T, Xₘ[9,:]) # properties of the Thrombin curve 
     
     return (p_best, Yₘ, Y)
 end
