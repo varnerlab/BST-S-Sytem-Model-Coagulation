@@ -8,7 +8,7 @@ ensemble_archive = zeros(number_of_parameters+1,number_of_samples); # first row 
 
 # main loop -
 p_previous = nothing
-for i ∈ 1:number_of_samples
+for i ∈ 9:number_of_samples
 
     # run the learn routine -
     (p, Yₘ, Y) = learn_optim(i; pₒ = p_previous)
@@ -32,5 +32,5 @@ for i ∈ 1:number_of_samples
     # dump output to disk -
     data_output = [Y Yₘ]
     path_to_synthetic_patient_otuput = joinpath(_PATH_TO_TMP, "SIM-Synthetic-P$(i).csv")
-    CSV.write(path_to_synthetic_patient_otuput, Tables.table(ensemble_archive))
+    CSV.write(path_to_synthetic_patient_otuput, Tables.table(data_output))
 end
