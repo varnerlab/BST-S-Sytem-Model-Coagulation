@@ -53,7 +53,9 @@ function learn_optim(index::Int, model::Dict{String,Any}, training_df::DataFrame
 
     # set default set as the start -
     if (isnothing(pₒ) == true)
-        pₒ = κ[:,1]
+        P = length( κ[:,1])
+        σ = 0.1 # move up to 10%
+        pₒ = κ[:,1].*(1 .+ σ*rand(-1:1,P))
     end
 
     # setup the objective function -
