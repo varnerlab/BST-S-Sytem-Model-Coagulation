@@ -10,7 +10,6 @@ using CSV
 using DataFrames
 using LinearAlgebra
 using Plots
-using DataFrames
 using Distributions
 using DifferentialEquations
 using Tables
