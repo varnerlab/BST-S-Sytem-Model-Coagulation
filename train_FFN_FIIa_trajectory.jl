@@ -11,8 +11,6 @@ number_of_synthetic_patients = 500
 trajectory_range = range(1,stop=2001,step=100) |> collect
 N = length(trajectory_range)
 
-
-
 # initialize storage for the training data -
 training_data = Vector{Tuple{Vector{Float32},Vector{Float32}}}()
 for i ∈ 1:number_of_synthetic_patients
