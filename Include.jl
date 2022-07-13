@@ -4,6 +4,7 @@ _PATH_TO_SRC = joinpath(_BASE_PATH, "src")
 _PATH_TO_DATA = joinpath(_BASE_PATH, "data")
 _PATH_TO_MODEL = joinpath(_BASE_PATH, "model")
 _PATH_TO_TMP = joinpath(_BASE_PATH, "tmp")
+_PATH_TO_SYNTHETIC_ENSEMBLE = joinpath(_BASE_PATH, "synthetic_10K_ensemble_s_system")
 
 # load external packages -
 using CSV

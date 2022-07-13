@@ -2,12 +2,12 @@
 include("Include.jl")
 
 # how many samples?
-number_of_samples = 500
+number_of_samples = 10000
 number_of_parameters = 12
 ensemble_archive = zeros(number_of_parameters+1,1); # first row is the fitness 
 
 # load the training data -
-path_to_training_data = joinpath(_PATH_TO_DATA, "Training-Synthetic-Thrombin-TF-1K.csv")
+path_to_training_data = joinpath(_PATH_TO_DATA, "Training-Synthetic-Thrombin-TF-10K.csv")
 training_df = CSV.read(path_to_training_data, DataFrame)
 
 # build the model structure -
