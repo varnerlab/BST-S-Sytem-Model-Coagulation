@@ -28,3 +28,4 @@ tmp
 Manifest.toml
 .DS_Store
 synthetic_10K_ensemble_s_system
+notebooks
